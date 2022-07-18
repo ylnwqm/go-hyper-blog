@@ -3,12 +3,13 @@ package main
 import (
 	"github.com/kataras/iris/v12"
 	config "go-hyper-blog/configs"
+	"go-hyper-blog/middleware"
 	"os"
 	"path"
 )
 
 func newApp() *iris.Application {
-	iris := iris.New()
+	app := iris.New()
 	//注册路由文件
 	//router.InitApp(iris)
 
@@ -16,10 +17,12 @@ func newApp() *iris.Application {
 	currentDir, _ := os.Getwd()
 	configFileDir := path.Join(currentDir, "config.yml")
 	config.Init(configFileDir)
-	println(config.Setting.App.BindAddress)
-	println(config.Setting.App.Port)
-	println(config.Setting.Log.Level)
-	return iris
+
+	//注册iris配置
+	app.Configure(iris.WithConfiguration(config.Setting.Iris))
+	//注册全局中间件  目前没有用到，取自其他项目
+	app.UseGlobal(middleware.IrisRequestHandler)
+	return app
 }
 
 func main() {

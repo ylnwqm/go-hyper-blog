@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"github.com/jinzhu/configor"
 	"github.com/kataras/iris/v12"
 	"log"
@@ -70,8 +69,6 @@ type LogConfig struct {
 func Init(path string) {
 	//所以这里setting赋值时 需要将Config转为地址
 	Setting = &Config{}
-	set := *Setting
-	fmt.Printf("student=%+v\n", set)
 	if path == "" {
 		Setting.initDefaultConfig()
 		return
