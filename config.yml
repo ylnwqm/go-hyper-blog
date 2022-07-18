@@ -9,7 +9,7 @@ app:
   timezone: Asia/Shanghai
   debug: true
   bindAddress: 127.0.0.1
-  port: 10000
+  port: 8888
 mysql:
   host: db-host
   port: 3306

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/kataras/iris/v12"
 	config "go-hyper-blog/configs"
 	"go-hyper-blog/middleware"
@@ -26,5 +27,9 @@ func newApp() *iris.Application {
 }
 
 func main() {
-	newApp()
+	app := newApp()
+	err := app.Run(iris.Addr(fmt.Sprintf("%s:%d", config.Setting.App.BindAddress, config.Setting.App.Port)))
+	if err != nil {
+		app.Logger().Print("Server failed to start")
+	}
 }
