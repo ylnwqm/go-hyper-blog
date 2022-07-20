@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/kataras/iris/v12"
 	"go-hyper-blog/configs"
-	"go-hyper-blog/middleware"
 	"go-hyper-blog/routes"
 	"os"
 	"path"
@@ -22,7 +21,7 @@ func newApp() *iris.Application {
 	app.Configure(iris.WithConfiguration(config.Setting.Iris))
 
 	//注册全局中间件  目前没有用到，取自其他项目
-	app.UseGlobal(middleware.IrisRequestHandler)
+	//app.UseGlobal(middleware.IrisRequestHandler)
 	return app
 }
 
