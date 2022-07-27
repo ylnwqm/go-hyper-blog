@@ -19,7 +19,8 @@ func newApp() *iris.Application {
 	config.Init(configFileDir)
 	//注册iris配置
 	app.Configure(iris.WithConfiguration(config.Setting.Iris))
-
+	//注册html
+	app.RegisterView(iris.HTML("./views", ".html"))
 	//注册全局中间件  目前没有用到，取自其他项目
 	//app.UseGlobal(middleware.IrisRequestHandler)
 	return app
