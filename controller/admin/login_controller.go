@@ -13,7 +13,8 @@ type LoginController struct {
 	Session      *sessions.Session
 }
 
-func (l *LoginController) Login() mvc.Result {
+//
+func (l *LoginController) GetLogin() mvc.Result {
 
 	// 绑定： {{.message}}　为　"Hello world!"
 	/*println("就按就按家家爱")
