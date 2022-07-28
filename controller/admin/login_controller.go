@@ -25,7 +25,7 @@ func (l *LoginController) GetLogin() mvc.Result {
 	println("用到了Login控制器")
 
 	return mvc.View{
-		Name: "amdin/pages-login.html",
+		Name: "admin/pages-login.html",
 		Data: iris.Map{
 			"Title": "Profile of ",
 			"User":  1,
