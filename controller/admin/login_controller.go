@@ -13,6 +13,10 @@ type LoginController struct {
 	Session      *sessions.Session
 }
 
+func (l *LoginController) Get() {
+	println("哈哈哈哈哈,这是admin/login")
+}
+
 //
 func (l *LoginController) GetLogin() mvc.Result {
 
@@ -22,7 +26,7 @@ func (l *LoginController) GetLogin() mvc.Result {
 	// 渲染模板文件： ./views/hello.html
 	ctx.View("amdin/pages-login.html")*/
 
-	println("用到了Login控制器")
+	println("这是admin/login/login")
 
 	return mvc.View{
 		Name: "admin/pages-login.html",
