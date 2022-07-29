@@ -13,20 +13,18 @@ type LoginController struct {
 	Session      *sessions.Session
 }
 
-func (l *LoginController) Get() {
-	println("哈哈哈哈哈,这是admin/login")
+/**
+登录页 admin/login
+*/
+func (l *LoginController) Get() mvc.Result {
+	return mvc.View{
+		Name: "admin/pages-login.html",
+	}
 }
 
 //
-func (l *LoginController) GetLogin() mvc.Result {
-
-	// 绑定： {{.message}}　为　"Hello world!"
-	/*println("就按就按家家爱")
-	ctx.ViewData("message", "Hello world!")
-	// 渲染模板文件： ./views/hello.html
-	ctx.View("amdin/pages-login.html")*/
-
-	println("这是admin/login/login")
+func (l *LoginController) Post(ctx iris.Context) mvc.Result {
+	println(ctx.Params())
 
 	return mvc.View{
 		Name: "admin/pages-login.html",
