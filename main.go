@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/kataras/iris/v12"
 	"go-hyper-blog/configs"
+	"go-hyper-blog/database"
 	"go-hyper-blog/routes"
 	"os"
 	"path"
@@ -21,6 +22,23 @@ func newApp() *iris.Application {
 	config.Init(configFileDir)
 	//注册iris配置
 	app.Configure(iris.WithConfiguration(config.Setting.Iris))
+
+	//配置连接数据库
+	db, err := database.ConnectDb(
+		config.Setting.Mysql.Host,
+		config.Setting.Mysql.Port,
+		config.Setting.Mysql.User,
+		config.Setting.Mysql.Password,
+		config.Setting.Mysql.Database,
+	)
+	if err != nil {
+		app.Logger().Fatalf("error while loading the tables: %v", err)
+	}
+	sqlDB, errDb := db.DB()
+	if errDb != nil {
+		app.Logger().Fatalf("can not close database: %v", errDb)
+	}
+	defer sqlDB.Close()
 
 	//注册html
 	tmpl := iris.HTML("./views", ".html")

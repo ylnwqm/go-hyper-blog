@@ -23,11 +23,22 @@ func (l *LoginController) Get() mvc.Result {
 }
 
 //
-func (l *LoginController) Post(ctx iris.Context) mvc.Result {
-	println(ctx.Params())
+func (l *LoginController) Post() mvc.Result {
+	username := l.Ctx.FormValue("username")
+	passwd := l.Ctx.FormValue("passwd")
+
+	l.LoginService.GetUser(username, passwd)
+	/*if check == false {
+		return mvc.Response{
+			Path: "admin/login",
+		}
+	}*/
+
+	//加入session
+	//println(u)
 
 	return mvc.View{
-		Name: "admin/pages-login.html",
+		Name: "admin/index.html",
 		Data: iris.Map{
 			"Title": "Profile of ",
 			"User":  1,
