@@ -15,3 +15,5 @@
 vendor/
 workspace.xml
 .idea
+go.mod
+go.sum

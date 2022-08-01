@@ -11,11 +11,12 @@ app:
   bindAddress: 127.0.0.1
   port: 8888
 mysql:
-  host: db-host
+  host: 127.0.0.1
   port: 3306
-  database: db-name
-  user: db-user
-  password: db-password
+  database: bis
+  user: root
+
+  password: root
   charset: utf8
   sqlLog: true
   maxIdleConns: 10 #Maximum number of connections when idle
