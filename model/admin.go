@@ -1,5 +1,7 @@
 package model
 
+import "gorm.io/gorm"
+
 //先定义常量
 const STATUS_ENABLE = 1
 const STATUS_DISABLE = 1
@@ -9,9 +11,9 @@ var Status = map[int]string{0: "否", 1: "是"}
 
 //定义表结构数据
 type Admin struct {
-	Id     int
+	gorm.Model
 	Name   string
 	Email  string
 	Passwd string
-	Status int
+	Status int64
 }
