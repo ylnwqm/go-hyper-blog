@@ -39,6 +39,28 @@ func newApp() *iris.Application {
 		app.Logger().Fatalf("can not close database: %v", errDb)
 	}
 	defer sqlDB.Close()
+	/*db, err := gorm.Open(mysql.New(mysql.Config{
+		DSN:                       "root:root@tcp(127.0.0.1:3306)/bis?charset=utf8&parseTime=True&loc=Local", // DSN data source name
+		DefaultStringSize:         256,                                                                       // string 类型字段的默认长度
+		DisableDatetimePrecision:  true,                                                                      // 禁用 datetime 精度，MySQL 5.6 之前的数据库不支持
+		DontSupportRenameIndex:    true,                                                                      // 重命名索引时采用删除并新建的方式，MySQL 5.7 之前的数据库和 MariaDB 不支持重命名索引
+		DontSupportRenameColumn:   true,                                                                      // 用 `change` 重命名列，MySQL 8 之前的数据库和 MariaDB 不支持重命名列
+		SkipInitializeWithVersion: false,                                                                     // 根据当前 MySQL 版本自动配置
+	}), &gorm.Config{})
+	if err != nil {
+		app.Logger().Fatalf("error while loading the tables: %v", err)
+	}*/
+
+	/**
+	1. 声明一个result map
+	2. user 赋值model
+	3. db.Model(&user) 指定model ，如果只有First 则为result的model 会报错
+	4. Frist(&result)   将查询结果赋值给result
+	*/
+	/*result := map[string]interface{}{}
+	var user model.Admin
+	db.Model(&user).First(&result)
+	fmt.Printf("%+v", result)*/
 
 	//注册html
 	tmpl := iris.HTML("./views", ".html")

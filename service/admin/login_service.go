@@ -1,8 +1,6 @@
 package admin
 
 import (
-	"fmt"
-	"go-hyper-blog/model"
 	"gorm.io/gorm"
 )
 
@@ -10,15 +8,22 @@ import (
 	GetUser(username string, passowrd string)
 }*/
 
+var DB *gorm.DB
+var err error
+
 type LoginService struct {
 	//里边是具体要实现的方法
-	DB *gorm.DB
 }
 
-func (l *LoginService) GetUser(username string, password string) []model.Admin {
-	result := []model.Admin{}
+func (l *LoginService) GetUser(username string, password string) {
 
-	l.DB.Raw("select * from admin").Scan(&result)
-	fmt.Println(result)
-	return result
+	println(DB)
+	//admin := model.Admin{Name: "哈哈", Email: "aaaa", Passwd: "123456"}
+	//DB.Create(&admin)
+
+	//fmt.Printf("%v", admin)
+	/*result := model.Admin
+	fmt.Printf("值为 %#v", result)
+	DB.First(&result)
+	fmt.Printf("值为 %#v", result)*/
 }

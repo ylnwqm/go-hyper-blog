@@ -23,7 +23,7 @@ func (l *LoginController) Get() mvc.Result {
 }
 
 //
-func (l *LoginController) Post() mvc.Result {
+func (l *LoginController) Post() /* mvc.Result */ {
 	username := l.Ctx.FormValue("username")
 	passwd := l.Ctx.FormValue("passwd")
 
@@ -37,11 +37,11 @@ func (l *LoginController) Post() mvc.Result {
 	//加入session
 	//println(u)
 
-	return mvc.View{
+	/*return mvc.View{
 		Name: "admin/index.html",
 		Data: iris.Map{
 			"Title": "Profile of ",
 			"User":  1,
 		},
-	}
+	}*/
 }
