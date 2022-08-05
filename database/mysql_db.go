@@ -5,6 +5,7 @@ import (
 	config "go-hyper-blog/configs"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 var db *gorm.DB
@@ -13,7 +14,12 @@ var db *gorm.DB
 func ConnectDb(app *iris.Application) (*gorm.DB, error) {
 	dsn := config.Setting.Mysql.User + ":" + config.Setting.Mysql.Password + "@tcp(" + config.Setting.Mysql.Host + ":" + config.Setting.Mysql.Port + ")/" + config.Setting.Mysql.Database + "?charset=utf8mb4&parseTime=True&loc=Local"
 	var err error
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			TablePrefix:   "blog_",
+			SingularTable: true,
+		},
+	})
 
 	if err != nil {
 		app.Logger().Fatalf("error while loading the tables: %v", err)
