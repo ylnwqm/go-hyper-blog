@@ -24,33 +24,7 @@ func newApp() *iris.Application {
 	app.Configure(iris.WithConfiguration(config.Setting.Iris))
 
 	//配置连接数据库
-	db, err := database.ConnectDb(
-		config.Setting.Mysql.Host,
-		config.Setting.Mysql.Port,
-		config.Setting.Mysql.User,
-		config.Setting.Mysql.Password,
-		config.Setting.Mysql.Database,
-	)
-	if err != nil {
-		app.Logger().Fatalf("error while loading the tables: %v", err)
-	}
-	sqlDB, errDb := db.DB()
-	if errDb != nil {
-		app.Logger().Fatalf("can not close database: %v", errDb)
-	}
-	defer sqlDB.Close()
-	/*db, err := gorm.Open(mysql.New(mysql.Config{
-		DSN:                       "root:root@tcp(127.0.0.1:3306)/bis?charset=utf8&parseTime=True&loc=Local", // DSN data source name
-		DefaultStringSize:         256,                                                                       // string 类型字段的默认长度
-		DisableDatetimePrecision:  true,                                                                      // 禁用 datetime 精度，MySQL 5.6 之前的数据库不支持
-		DontSupportRenameIndex:    true,                                                                      // 重命名索引时采用删除并新建的方式，MySQL 5.7 之前的数据库和 MariaDB 不支持重命名索引
-		DontSupportRenameColumn:   true,                                                                      // 用 `change` 重命名列，MySQL 8 之前的数据库和 MariaDB 不支持重命名列
-		SkipInitializeWithVersion: false,                                                                     // 根据当前 MySQL 版本自动配置
-	}), &gorm.Config{})
-	if err != nil {
-		app.Logger().Fatalf("error while loading the tables: %v", err)
-	}*/
-
+	database.ConnectDb(app)
 	/**
 	1. 声明一个result map
 	2. user 赋值model
