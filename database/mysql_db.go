@@ -7,12 +7,13 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
+var db *gorm.DB
 
 //这里最后跟类型string的意思是，这些参数的所有类型均为string 相当于定义所有参数的返回类型
 func ConnectDb(app *iris.Application) (*gorm.DB, error) {
 	dsn := config.Setting.Mysql.User + ":" + config.Setting.Mysql.Password + "@tcp(" + config.Setting.Mysql.Host + ":" + config.Setting.Mysql.Port + ")/" + config.Setting.Mysql.Database + "?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	var err error
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		app.Logger().Fatalf("error while loading the tables: %v", err)
@@ -26,5 +27,5 @@ func ConnectDb(app *iris.Application) (*gorm.DB, error) {
 }
 
 func GetDb() *gorm.DB {
-	return DB
+	return db
 }
