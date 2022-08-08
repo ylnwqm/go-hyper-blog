@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"fmt"
+	"go-hyper-blog/common"
 	"go-hyper-blog/database"
 	"go-hyper-blog/model"
 )
@@ -15,13 +15,18 @@ type LoginService struct {
 }
 
 func (l *LoginService) GetUser(username string, password string) {
+	var adminModel model.Admin
+	//声明返回的map
+	result := map[string]interface{}{}
+	//使用adminmodel 并且赋值给result
+	//database.GetDb().Model(&adminModel).Where("name = ? AND passwd = ?", username, password).Find(&result)
+	//上面使用原生sql的方式，还有一种使用使用map 传递参数
+	database.GetDb().Model(&adminModel).Where(map[string]interface{}{"name": username, "passwd": password}).Find(&result)
+	if result == nil {
+		result["message"] = "账号密码错误"
+		//return result
+	}
 
-	//admin := model.Admin{Name: "哈哈", Email: "aaaa", Passwd: "123456"}
-	//DB.Create(&admin)
-
-	//fmt.Printf("%v", admin)
-	var result model.Admin
-	fmt.Printf("值为 %#v", result)
-	database.GetDb().First(&result)
-	fmt.Printf("值为 %#v", result)
+	result["message"] = "登录成功"
+	common.PrettyPrint(result)
 }

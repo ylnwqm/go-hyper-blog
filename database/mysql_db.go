@@ -5,6 +5,7 @@ import (
 	config "go-hyper-blog/configs"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 )
 
@@ -19,16 +20,17 @@ func ConnectDb(app *iris.Application) (*gorm.DB, error) {
 			TablePrefix:   "blog_",
 			SingularTable: true,
 		},
+		Logger: logger.Default.LogMode(logger.Info),
 	})
 
 	if err != nil {
 		app.Logger().Fatalf("error while loading the tables: %v", err)
 	}
-	sqlDB, errDb := db.DB()
+	/*sqlDB, errDb := db.DB()
 	if errDb != nil {
 		app.Logger().Fatalf("can not close database: %v", errDb)
 	}
-	defer sqlDB.Close()
+	defer sqlDB.Close()*/
 	return db, err
 }
 
