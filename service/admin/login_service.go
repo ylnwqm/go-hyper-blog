@@ -22,7 +22,7 @@ func (l *LoginService) GetUser(username string, password string) {
 	//database.GetDb().Model(&adminModel).Where("name = ? AND passwd = ?", username, password).Find(&result)
 	//上面使用原生sql的方式，还有一种使用使用map 传递参数
 	database.GetDb().Model(&adminModel).Where(map[string]interface{}{"name": username, "passwd": password}).Find(&result)
-	if result == nil {
+	if len(result) == 0 {
 		result["message"] = "账号密码错误"
 		//return result
 	}
