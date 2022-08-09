@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"fmt"
+	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/sessions"
 	"go-hyper-blog/database"
 	"go-hyper-blog/model"
@@ -14,6 +14,7 @@ import (
 type LoginService struct {
 	//里边是具体要实现的方法
 	Session *sessions.Session //里边的具体实现需要先将其声明为地址才可以
+	Ctx     iris.Context
 }
 
 func (l *LoginService) GetUser(username string, password string) {
@@ -28,10 +29,11 @@ func (l *LoginService) GetUser(username string, password string) {
 		result["message"] = "账号密码错误"
 		//return result
 	}
-	//common.PrettyPrint(result)
-	fmt.Printf("%+v", result["id"])
 
+	println(1111111111111111)
+	l.Ctx.SetCookieKV("userId", "家居安静安静")
+	println(22222)
+	//common.PrettyPrint(result)
 	//如果登录成功，设置session
-	//l.Session.Set("id", result["id"])
 	//result["message"] = "登录成功"
 }
