@@ -1,5 +1,5 @@
 --
--- DataTables Ajax and server-side processing database (SQLite)
+-- DataTables Ajax and server-side processing connect (SQLite)
 --
 DROP TABLE IF EXISTS datatables_demo;
 

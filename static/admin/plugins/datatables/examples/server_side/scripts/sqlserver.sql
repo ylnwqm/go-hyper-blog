@@ -1,5 +1,5 @@
 --
--- DataTables Ajax and server-side processing database (SQL Server)
+-- DataTables Ajax and server-side processing connect (SQL Server)
 --
 IF OBJECT_ID('dbo.datatables_demo', 'U') IS NOT NULL
   DROP TABLE dbo.datatables_demo;

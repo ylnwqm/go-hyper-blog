@@ -1,5 +1,5 @@
 --
--- DataTables Ajax and server-side processing database (Postgres)
+-- DataTables Ajax and server-side processing connect (Postgres)
 --
 DROP TABLE IF EXISTS datatables_demo;
 

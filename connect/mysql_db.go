@@ -1,4 +1,4 @@
-package database
+package connect
 
 import (
 	"github.com/kataras/iris/v12"
@@ -9,13 +9,13 @@ import (
 	"gorm.io/gorm/schema"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
 //这里最后跟类型string的意思是，这些参数的所有类型均为string 相当于定义所有参数的返回类型
-func ConnectDb(app *iris.Application) (*gorm.DB, error) {
+func ConnectDb(app *iris.Application) *gorm.DB {
 	dsn := config.Setting.Mysql.User + ":" + config.Setting.Mysql.Password + "@tcp(" + config.Setting.Mysql.Host + ":" + config.Setting.Mysql.Port + ")/" + config.Setting.Mysql.Database + "?charset=utf8mb4&parseTime=True&loc=Local"
 	var err error
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			TablePrefix:   "blog_",
 			SingularTable: true,
@@ -28,12 +28,8 @@ func ConnectDb(app *iris.Application) (*gorm.DB, error) {
 	}
 	/*sqlDB, errDb := db.DB()
 	if errDb != nil {
-		app.Logger().Fatalf("can not close database: %v", errDb)
+		app.Logger().Fatalf("can not close connect: %v", errDb)
 	}
 	defer sqlDB.Close()*/
-	return db, err
-}
-
-func GetDb() *gorm.DB {
-	return db
+	return DB
 }

@@ -3,9 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/kataras/iris/v12"
-	"github.com/kataras/iris/v12/sessions"
 	"go-hyper-blog/configs"
-	"go-hyper-blog/database"
+	"go-hyper-blog/connect"
 	"go-hyper-blog/routes"
 	"os"
 	"path"
@@ -25,7 +24,9 @@ func newApp() *iris.Application {
 	app.Configure(iris.WithConfiguration(config.Setting.Iris))
 
 	//配置连接数据库
-	database.ConnectDb(app)
+	connect.ConnectDb(app)
+	//配置session
+	/*connect.GetSession(app)*/
 
 	//注册html
 	tmpl := iris.HTML("./views", ".html")
@@ -49,34 +50,10 @@ func newApp() *iris.Application {
 	return app
 }
 
-const cookieNameForSessionID = "session_id_cookie"
-
 func main() {
-	app := iris.New()
-	sess := sessions.New(sessions.Config{
-		Cookie: cookieNameForSessionID,
-		// CookieSecureTLS: true,
-		AllowReclaim: true,
-	})
-	app.Use(sess.Handler())
-	app.Get("/login", login)
-	app.Listen(":8888")
-	/*app := newApp()
+	app := newApp()
 	err := app.Run(iris.Addr(fmt.Sprintf("%s:%d", config.Setting.App.BindAddress, config.Setting.App.Port)))
 	if err != nil {
 		app.Logger().Print("Server failed to start")
-	}*/
-}
-
-func login(ctx iris.Context) {
-	println(111111111111)
-	session := sessions.Get(ctx)
-
-	// Authentication goes here
-	// ...
-	println(22222)
-	// Set user as authenticated
-	session.Set("authenticated", "哈哈哈哈哈")
-	auth := session.GetString("authenticated")
-	fmt.Printf("%+v", auth)
+	}
 }

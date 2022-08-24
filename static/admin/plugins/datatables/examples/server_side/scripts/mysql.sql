@@ -1,5 +1,5 @@
 --
--- DataTables Ajax and server-side processing database (MySQL)
+-- DataTables Ajax and server-side processing connect (MySQL)
 --
 
 DROP TABLE IF EXISTS `datatables_demo`;

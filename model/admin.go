@@ -12,8 +12,8 @@ var Status = map[int]string{0: "否", 1: "是"}
 //定义表结构数据
 type Admin struct {
 	gorm.Model
-	Name   string `gorm:"size:255"`
-	Email  string `gorm:"size:100"`
-	Passwd string `gorm:"size:100"`
-	Status int64
+	Name     string `gorm:"size:255"`
+	Email    string `gorm:"size:100"`
+	Password string `gorm:"size:100"`
+	Status   int64
 }

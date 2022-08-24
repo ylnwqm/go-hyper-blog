@@ -476,7 +476,7 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
         **/         
         name: null,
         /**
-        Primary key of editable object (e.g. record id in database). For composite keys use object, e.g. <code>{id: 1, lang: 'en'}</code>.
+        Primary key of editable object (e.g. record id in connect). For composite keys use object, e.g. <code>{id: 1, lang: 'en'}</code>.
         Can be calculated dynamically via function.
 
         @property pk 

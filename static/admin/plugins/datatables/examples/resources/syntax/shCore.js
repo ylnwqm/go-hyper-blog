@@ -2003,7 +2003,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
         var keywords =  'absolute action add after alter as asc at authorization begin bigint ' +
                         'binary bit by cascade char character check checkpoint close collate ' +
                         'column commit committed connect connection constraint contains continue ' +
-                        'create cube current current_date current_time cursor database date ' +
+                        'create cube current current_date current_time cursor connect date ' +
                         'deallocate dec decimal declare default delete desc distinct double drop ' +
                         'dynamic else end end-exec escape except exec execute false fetch first ' +
                         'float for force foreign forward free from full function global goto grant ' +
